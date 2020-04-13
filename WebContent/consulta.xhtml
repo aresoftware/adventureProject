@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/WEB-INF/templates/ideatemplate.xhtml">
+	<ui:define name="content">
+		<div class="container">
+			<div class="row">
+				<h:form id="consultaid" styleClass="form-horizontal">
+					<body>
+						<div>
+						<center>
+						<div class="navbar navbar-inverse">
+							<div class="navbar-brand">
+								<h:outputText value="Busqueda de Productos y Servicios" />
+								<h:commandLink value="Productos" action="#{ideaBean.regresarProd}"></h:commandLink>
+							</div>
+						</div>
+						
+						
+						<table class="table">
+						<tr>
+							<td>
+								<center>
+								<h5>EN COLOMBIA?</h5>
+							
+								<a href="http://sipi.sic.gov.co/sipi/Extra/Default.aspx?sid=636397881549464636" target="_blank">Base de datos (SIPI)</a>
+							
+								</center>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<center>
+								<h5>EN EL MUNDO?</h5>
+								
+									
+									<a href="http://www.wipo.int/reference/es/branddb/" target="_blank">Base Mundial de Datos sobre Marcas</a>
+									<p></p>
+									<a href="http://www.wipo.int/madrid/monitor/es/index.jsp" target="_blank">Madrid Monitor</a>
+									<p></p>
+									<a href="https://www.tmdn.org/tmview/welcome.html?lang=es" target="_blank">TMview</a>
+								</center>
+							</td>
+						</tr>
+						<tr>
+						
+							<td>
+							
+								<h:inputText id="ba1" value="#{ideaBean.search.palabra}"></h:inputText>
+								<h:commandButton id="pa1" value="Busqueda" 
+								action="#{ideaBean.buscarIdea}" 	
+								style="background-image: url('..\\img\\buscar.jpg'); width:65px; height: 65px; color: white; border-color: white; font-size:15px; ">
+								</h:commandButton>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<h:dataTable id="tidea" value="#{ideaBean.ideaList}" var="idea"
+													class="table table-striped table-hover table-bordered tableUpdated">
+										<h:column>
+											<f:facet name="header">CIP: </f:facet>
+											<h:outputText value="#{idea.cip}"></h:outputText>
+										</h:column>
+										<h:column>
+											<f:facet name="header">TITULO</f:facet>
+											<h:outputLabel value="#{idea.titulo}"></h:outputLabel>
+										</h:column>
+										<h:column>
+											<f:facet name="header">INVENTOR</f:facet>
+											<h:outputText value="#{idea.inventor}"></h:outputText>
+										</h:column>
+																		
+									</h:dataTable>
+							</td>
+						</tr>
+							
+						
+						</table>
+						</center>
+							<div>
+								<img id="pfotoBombillo" src="img/health.jpg" width="20%" />
+							</div>
+						
+						</div>
+					</body>
+				</h:form>
+			</div>
+		</div>
+
+
+
+
+	</ui:define>
+
+</ui:composition>
+
+</html>

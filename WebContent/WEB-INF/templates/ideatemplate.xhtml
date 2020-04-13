@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<head>
+<title><ui:insert name="title">IdeaHealth</ui:insert></title>
+<link rel="icon" type="image/png" href="img/health.png" />
+
+
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<!-- *************************************************************************
+	**************************   STYLE SHEET   *******************************
+	************************************************************************** -->
+
+
+
+<!-- *************************************************************************
+	**************************        JS       *******************************
+	************************************************************************** -->
+
+<script type="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.easing.1.3.js"> </script>
+<script type="text/javascript" src="js/hoverIntent.js"> </script>
+<script type="text/javascript" src="js/superfish.js"> </script>
+<script type="text/javascript" src="js/supersubs.js"> </script>
+<script type="text/javascript" src="js/custom.js"> </script>
+<script type="text/javascript" src="js/scrolltopcontrol.js"> </script>
+<script type="text/javascript" src="js/twitter.js"> </script>
+<script type="text/javascript" src="js/jquery.flexslider-min.js"> </script>
+<script type="text/javascript" src="js/jquery.prettyPhoto.js"> </script>
+<script type="text/javascript" src="js/jquery.quicksand.js"> </script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#form").val();
+	});
+	</script>
+
+<!-- END OF SCRIPT FOR FORM -->
+<!--Mobile Fix for header-->
+<script type="text/javascript">
+	$(document).ready(function(){
+	
+		$('.trigger').bind('touchstart', function(){
+	    $('ul#.social').addClass('thover');
+	    return false;
+	}).bind('touchend', function(){
+	    $(this).removeClass('thover');
+	});
+		$('.searchtrigger').bind('touchstart', function(){
+	    $('ul#search').addClass('thover');
+	    return false;
+	}).bind('touchend', function(){
+	    $(this).removeClass('thover');
+	});
+	});
+	</script>
+<!--End Mobile Script-->
+
+
+<!-- *************************************************************************
+	*********************   THIS IS THE SLIDER JS    **************************
+	************************************************************************** -->
+<script type="text/javascript">
+	$(window).load(function() {
+				$('#slider').flexslider();
+			});
+			
+	</script>
+
+
+</head>
+
+<body>
+
+	<div id="header">
+		<ui:insert name="cabeza">
+			<!--  include your header file or uncomment the include below and create header.xhtml in this directory -->
+			<ui:include src="/WEB-INF/templates/headIdea.xhtml" />
+		</ui:insert>
+	</div>
+
+
+	<div id="content">
+		<ui:insert name="content">
+    	Content area.  See comments below this line in the source.
+    	<!--  include your content file or uncomment the include below and create content.xhtml in this directory -->
+			<!-- <div> -->
+			<!-- <ui:include src="content.xhtml"/> -->
+			<!-- </div> -->
+		</ui:insert>
+	</div>
+
+	<div id="footer">
+		<ui:insert name="pie">
+			<!--  include your header file or uncomment the include below and create footer.xhtml in this directory -->
+			<ui:include src="/WEB-INF/templates/footIdea.xhtml" />
+		</ui:insert>
+	</div>
+
+</body>
+
+</html>

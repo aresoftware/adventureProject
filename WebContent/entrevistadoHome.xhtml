@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"></link>
+	<link href="resources/css/ali/main.css" rel="stylesheet"></link>
+    
+
+</head>
+
+<ui:composition template="/WEB-INF/templete/adverturetemplate.xhtml">
+	<ui:define name="content">
+		<h:body>
+			<h:form id="homeid" styleClass="form-horizontal">
+			<p:growl id="messages" showDetail="true" />
+		
+			
+	<p:layout style="min-width:200px;height:170px;">
+	    <p:layoutUnit position="west" resizable="true" size="230" minSize="40" maxSize="230">
+	        <p:megaMenu orientation="vertical" style="margin-top:20px">
+			    <p:menuitem value="Mi Agenda" action="#{loging.save}" 
+			        	update="formAgenda:miagenda" 
+			        	icon="pi pi-check" />
+			    <p:menuitem value="Seguimiento" url="#" />
+			</p:megaMenu>		
+				        
+	        
+	    </p:layoutUnit>
+	 
+	    <p:layoutUnit position="center">
+	        <h:panelGrid header="Siguiente Cita" columns="2" columnClasses="grid,grid">
+		        <h:panelGrid header="Cita" columns="2" columnClasses="label, value">
+				    <p:outputLabel for="from" value="From:" />
+				    <h:outputText id="from" value="#{loging.scheduleJava8View.event.startDate}" pattern="dd/MM/yyyy" showTime="true" appendTo="@(body)"  />
+				 
+				    <p:outputLabel for="to" value="To:" />
+				    <h:outputText id="to" value="#{loging.scheduleJava8View.event.endDate}" pattern="dd/MM/yyyy" showTime="true" appendTo="@(body)" />
+		        
+		        	
+		        </h:panelGrid>
+		        <h:panelGrid header="Cita" columns="1" columnClasses="label">
+					<p:outputLabel for="title" value="Tipo Proceso:" />
+				    <h:outputText id="title" value="#{loging.scheduleJava8View.event.title}" />
+				    
+				    <h:outputText id="identrevistado" value="#{loging.scheduleJava8View.cita.funcionario}" />
+				    
+				    <p:button value="show cita" onclick="window.open('#{loging.scheduleJava8View.cita.url}');return false;" />
+				    <p:commandButton action="#{loging.abrirCita}" update="messages" value="Abrir Cita" width="25%"/>
+				    		        	
+		        </h:panelGrid>
+	        </h:panelGrid>
+	    </p:layoutUnit>
+	    
+	    <p:layoutUnit position="east">
+	    	<h:form id ="formClock">
+	        <p:clock displayMode="analog" />
+	        </h:form>
+	    </p:layoutUnit>
+			    
+	</p:layout>	
+
+		
+		
+		<h:form id="formAgenda">
+		<p:outputPanel id="miagenda">
+		
+		</p:outputPanel>
+			    <p:growl id="messages" showDetail="true" />
+			      
+			    <h:panelGrid columnClasses="value">
+			        <p:schedule id="schedule" value="#{loging.scheduleJava8View.eventModel}" widgetVar="myschedule" >
+			 
+			            <p:ajax event="dateSelect" listener="#{loging.scheduleJava8View.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+			            <p:ajax event="eventSelect" listener="#{loging.scheduleJava8View.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+			            <p:ajax event="eventMove" listener="#{loging.scheduleJava8View.onEventMove}" update="messages" />
+			            <p:ajax event="eventResize" listener="#{loging.scheduleJava8View.onEventResize}" update="messages" />
+			 
+			        </p:schedule>
+			    </h:panelGrid>
+			     
+			    <p:dialog widgetVar="eventDialog" header="Event Details" showEffect="clip" hideEffect="clip" modal= "true">
+			        <h:panelGrid id="eventDetails" columns="2">
+			            <p:outputLabel for="title" value="Titles:" />
+			            <p:inputText id="title" value="#{loging.scheduleJava8View.event.title}" required="true" />
+			 
+			            <p:outputLabel for="from" value="From:" />
+			            <p:datePicker id="from" value="#{loging.scheduleJava8View.event.startDate}" pattern="dd/MM/yyyy" showTime="true" appendTo="@(body)"  />
+			 
+			            <p:outputLabel for="to" value="To:" />
+			            <p:datePicker id="to" value="#{loging.scheduleJava8View.event.endDate}" pattern="dd/MM/yyyy" showTime="true" appendTo="@(body)" />
+			            
+			            <h:commandButton id="selCita" value="Seleccionar Cita" action="#{loging.scheduleJava8View.seleccionarCita}" oncomplete="PF('eventDialog').hide();" />
+			        </h:panelGrid>
+			    </p:dialog>    
+			</h:form>
+		
+		
+		
+    			
+			
+			
+			</h:form>
+			
+		</h:body>
+		
+
+
+
+	</ui:define>
+
+</ui:composition>
+
+
+</html>

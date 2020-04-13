@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
+    <h:outputStylesheet library="css" name="prime.css" />
+
+	<link href="resources/css/ali/main.css" rel="stylesheet"></link>
+    
+</h:head>
+<h:body>
+			
+	<h:form>
+	
+	<center>
+	<h3>Enrolamiento</h3>
+	<h1>Adventure</h1>
+	
+	<p:panelGrid columns="1" layout="grid" styleClass="showcase-text-align-center">
+
+		<h3>Unirse a Adventure</h3>
+        
+	<p:separator />
+         
+    <p:growl id="messages"  showDetail="true"/>
+    
+ 	
+    <p:wizard flowListener="#{loging.usu.userWizard.onFlowProcess}" >
+        <p:tab id="personal" title="Personal">
+            <p:panel header="Detalles Personales" style="width:550px;">
+                <p:messages />
+                <h:panelGrid columns="2" columnClasses="label, value">
+                    <h:outputText value="Nombres: *" />
+                    <p:inputText value="#{loging.usu.nombres}" required="true" label="Nombres"/>
+ 
+                    <h:outputText value="Apellidos: *" />
+                    <p:inputText value="#{loging.usu.apellidos}" required="true" label="Apellidos"/>
+ 					
+			        <p:outputLabel for="@next" value="Tipo Doc: " />
+			        <p:selectOneMenu id="car" value="#{loging.usu.par_tipo_doc}">
+			            <f:selectItems value="#{loging.servicios.tipoDocs}" var="theme" itemLabel="#{theme.name}" itemValue="#{theme.id}"/>
+			        </p:selectOneMenu>
+						 		
+                    <h:outputText value="Nro Documento: *" />
+                    <p:inputText value="#{loging.usu.per_nro_doc}" required="true" label="Nro Documento"/>
+                     
+                </h:panelGrid>
+            </p:panel>
+        </p:tab>
+         
+        <p:tab id="address" title="Dirección">
+            <p:panel header="Detalles dirección" style="width:550px;">
+                <p:messages />
+                <h:panelGrid columns="2" columnClasses="label, value">
+                    <h:outputText value="Dirección: " />
+                    <p:inputText value="#{loging.usu.dir}" />
+ 
+                    <h:outputText value="Ciudad: " />
+                    <p:inputText value="#{loging.usu.ciudad}" />
+                     
+                </h:panelGrid>
+            </p:panel>
+        </p:tab>
+ 
+ 		
+        <p:tab id="contact" title="Contact">
+            <p:panel header="Información de Contacto" style="width:550px;">
+                <p:messages />
+                <h:panelGrid columns="2" columnClasses="label, value">
+                    
+                    <h:outputText value="Email: *" />
+                    <h:inputText id="email" value="#{loging.usu.email}" 
+						required="true" label="Email Address">
+						
+						<f:validator validatorId="adventure.servicios.EmailValidator" />
+						
+					  </h:inputText>
+                           
+ 
+                    <h:outputText value="Celular: *" />
+                    <p:inputText value="#{loging.usu.celular}" required="true" label="Celular"/>
+                     
+                </h:panelGrid>
+            </p:panel>
+        </p:tab>
+        
+        <p:tab id="crrdencial" title="Credenciales">
+            <p:panel header="Credenciales" style="width:550px;">
+                <p:messages />
+                <h:panelGrid columns="2" columnClasses="label, value">
+                    <h:outputText value="Usuario: *" />
+                     <h:inputText value="#{loging.usu.usuario}" required="true" label="Usuario"/>
+
+                     <h:outputText value="Clave: *" />
+                     <p:password id="fpassword" value="#{loging.usu.clave}" required="true" label="Clave"/>
+                                     
+                </h:panelGrid>
+            </p:panel>
+        </p:tab>
+ 
+        <p:tab id="confirm" title="Confirmation">
+            <p:panel header="Confirmation" style="width:550px;">
+                <h:panelGrid id="confirmation" columns="2" columnClasses="grid,grid">
+                    <h:panelGrid columns="2" columnClasses="label, value">
+                        <h:outputText value="Nombres: " />
+                        <h:outputText value="#{loging.usu.nombres}" styleClass="outputLabel"/>
+ 
+                        <h:outputText value="Apellidos: " />
+                        <h:outputText value="#{loging.usu.apellidos}" styleClass="outputLabel"/>
+ 
+                        <h:outputText value="Nro Documento: " />
+                        <h:outputText value="#{loging.usu.per_nro_doc}" styleClass="outputLabel"/>
+                    </h:panelGrid>
+ 
+                    <h:panelGrid columns="2" columnClasses="label, value">
+                        <h:outputText value="Dirección: " />
+                        <h:outputText value="#{loging.usu.dir}" styleClass="outputLabel"/>
+                        
+                        <h:outputText value="Ciudad: " />
+                        <h:outputText value="#{loging.usu.ciudad}" styleClass="outputLabel"/>
+                    
+                        <h:outputText value="Email: " />
+                        <h:outputText value="#{loging.usu.email}" styleClass="outputLabel"/>
+ 
+                        <h:outputText value="Phone " />
+                        <h:outputText value="#{loging.usu.celular}" styleClass="outputLabel"/>
+ 
+                        
+                        <h:outputText />
+                        <h:outputText />
+                    </h:panelGrid>
+                </h:panelGrid>
+                
+ 
+                <p:commandButton value="Guardar" action="#{loging.usu.guardar}" update="messages" process="@this"/>
+            </p:panel>
+        </p:tab>
+    </p:wizard>
+    
+ </p:panelGrid>
+ <p:separator />
+	
+	
+     
+    <p:spacer height="10" />
+     
+    <p:separator />
+ </center>
+</h:form>
+			
+						
+</h:body>
+		
+
+
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Adventure Project</title>
+    <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
+    
+    <h:outputStylesheet library="css" name="prime.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"></link>
+	<link href="resources/css/ali/main.css" rel="stylesheet"></link>
+    
+</h:head>
+
+<h:body>
+<h:form>
+	
+	<p:growl id="messages" showDetail="true" />
+	<center>
+	
+	
+	
+	<h3>Responsive (Basic)</h3>
+	
+	<h1>Adventure</h1>
+	
+	<p:panelGrid columns="1" layout="grid" styleClass="showcase-text-align-center">
+		
+		
+		
+		<h3>Iniciar sesión en Adventure</h3>
+		
+        
+	<p:separator />	
+		
+	   <span class="ui-float-label">
+	       <p:inputText id="float-input" value="#{loging.nombre}" placeholder="Nombre Usuario"/>
+	       <p:outputLabel for="float-input" value="Usuario" />
+	   </span>
+	   <span class="ui-float-label">
+	       <p:password id="float-password" value="#{loging.clave}"  placeholder="Clave Usuario"/>
+	       <p:outputLabel for="@previous" value="Password" />
+	   </span>
+		   
+	 	<p:commandButton action="#{loging.ingresar}" update="messages" value="Iniciar sesión" width="25%"/>
+		
+	<p:separator />
+	
+		<p:commandButton update="messages" value="Registrarse" action="#{loging.registrar}"/>
+		
+	</p:panelGrid>
+	
+	
+	<p:separator />
+	
+	
+     
+    <p:spacer height="10" />
+     
+    <p:separator />
+     
+    	
+	
+	</center>
+
+
+</h:form>
+</h:body>
+
+
+</html>

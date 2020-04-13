@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+
+<link rel="stylesheet" type="text/css" href="torneo.css"/>
+
+		
+	<!-- DatePicker JavaScript & CSS -->
+	<script type="text/javascript"
+		src="https://code.jquery.com/jquery-1.12.4.js" />
+	<script type="text/javascript"
+		src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" />
+	<link rel="stylesheet"
+		href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+
+	<h:outputScript library="js" name="formatDatePicker.js" />
+	<h:outputStylesheet library="css" name="bootstrap.min.css" />
+
+	<h:outputScript library="js" name="torneo.js" />
+	<h:outputStylesheet library="css" name="torneo.css" />
+
+
+
+	<title>IdeaHealth!! - Administra tu Salud, Organiza tu	vida</title>
+	<style type="text/css">
+.col-xs-updated {
+	width: 92% !important;
+}
+</style>
+
+
+
+</h:head>
+<h:body>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-xs-updated">
+				<h:form id="cabezaform" styleClass="form-horizontal">
+
+					<ul>
+					<div>
+						<li>
+						<h:commandButton id="a2" value="Inicio" 
+							action="#{ideaBean.iniciar}" class="button_idea"></h:commandButton>
+						</li>
+						<li>
+						<h:commandButton id="a3" value="Contacto"
+							action="#{ideaBean.contactar}" class="button_orange"></h:commandButton>
+						</li>
+						
+					</div>
+					
+					
+					
+								<!-- Start of google -->
+
+								<li class="google"><a href="http://google.com"
+									target="_blank"><img src="img/google1.png" width="30"
+										height="30" alt="google" /></a></li>
+								<!-- Start of facebook -->
+
+								<li class="facebook"><a href="http://facebook.com"
+									target="_blank"><img src="img/facebook1.png" width="30"
+										height="30" alt="facebook" /></a></li>
+								<!-- Start of twitter -->
+
+								<li class="twitter"><a href="http://twitter.com"
+									target="_blank"><img src="img/twitter1.png" width="30"
+										height="30" alt="twitter" /></a></li>
+								<!-- Start of linkedin -->
+
+								<li class="linkedin"><a href="http://linkedin.com"
+									target="_blank"><img src="img/linkedin1.png" width="30"
+										height="30" alt="linkedin" /></a></li>
+								<!-- Start of dribbble -->
+
+								<li class="dribbble"><a href="http://dribbble.com"
+									target="_blank"><img src="img/dribbble1.png" width="30"
+										height="30" alt="dribbble" /></a></li>
+							
+						
+					</ul>
+
+				</h:form>
+			</div>
+		</div>
+	</div>
+</h:body>
+</html>

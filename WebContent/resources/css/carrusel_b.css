@@ -1,0 +1,87 @@
+/* carrusel_b.css */
+
+/* BÀSIC */
+#carrusel_b {
+	position: relative; /* els fills son absoluts respecte al pare */
+	border: 4px solid #000;
+}
+
+#carrusel_b,#carrusel_b ul.photos_b {
+	width: 800px; /* amplada i alçada de les imatges */
+	height: 600px;
+}
+
+#carrusel_b ul.links_b,#carrusel_b ul.photos_b {
+	list-style-type: none;
+	margin: 0;
+	padding: 100; /* esborrar els estils de llista */
+}
+
+/* ENLLAÇOS */
+#carrusel_b ul.links_b {
+	position: relative;
+	right: 0;
+	top: 100; /* posició */
+	background-color: rgba(0, 0, 0, 0.1); /* negre molt transparent */
+}
+
+#carrusel_b ul.links_b li {
+	display: inline; /* en horitzontal */
+}
+
+#carrusel_b ul.links_b a {
+	font-family: sans-serif;
+	text-decoration: none;
+	color: #fff;
+	text-shadow: 0 0 3px #000; /* lletra blanca amb ombra negra */
+	display: inline-block;
+	padding: 0.5em 1em;
+}
+
+#carrusel_b ul.links_b a:hover {
+	text-decoration: underline;
+}
+
+#carrusel_b ul.links_b a.current {
+	background-color: rgba(0, 0, 0, 0.2); /* negre semitransparent */
+}
+
+/* FOTOS */
+#carrusel_b ul.photos_b,#carrusel_b ul.photos_b img {
+	position: absolute;
+	left: 0;
+	top: 100;
+}
+
+#carrusel_b ul.photos_b img {
+	opacity: 0; /* transparent */
+}
+
+#carrusel_b ul.photos_b img:target {
+	opacity: 1; /* opac */
+}
+
+/* ANIMACIÓ */
+#carrusel_b ul.photos_b img,#carrusel_b ul.photos_b img:target {
+	transition-property: opacity;
+	transition-duration: 2s;
+	-moz-transition-property: opacity;
+	-moz-transition-duration: 2s;
+	-moz-transition-timing-function: ease-out;
+	-webkit-transition-property: opacity;
+	-webkit-transition-duration: 2s;
+	-o-transition-property: opacity;
+	-o-transition-duration: 2s;
+}
+
+#carrusel_b ul.links_b a,#carrusel_b ul.links_b a.current {
+	transition-property: background-color;
+	transition-duration: 1s;
+	-moz-transition-property: background-color;
+	-moz-transition-duration: 1s;
+	-moz-transition-timing-function: ease-out;
+	-webkit-transition-property: background-color;
+	-webkit-transition-duration: 1s;
+	-o-transition-property: background-color;
+	-o-transition-duration: 1s;
+}

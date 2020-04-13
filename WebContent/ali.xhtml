@@ -1,0 +1,86 @@
+<html>
+
+<head>
+    <title>Video Chat App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"></link>
+    <link href="resources/css/ali/main.css" rel="stylesheet"></link>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row h-10 w-100">
+            <div class="col">
+                <select id="filter" class="w-100 bg-dark text-light ml-2 mt-2 select font-weight-bold border">
+                    <option value="none">Normal</option>
+                    <option value="grayscale(100%)">B y W</option>
+                    <option value="sepia(100%)">Old School</option>
+                    <option value="contrast(150%)">Lumination</option>
+                    <option value="blur(20px)">Hidden Mist</option>
+                    <option value="invert(100%)">Dracula</option>
+                    <option value="hue-rotate(180deg">X-men Beast</option>
+                    <option value="saturate(25)">Super Saiyan God</option>
+                </select>
+            </div>
+            <div class="col">
+                <div class="float-right mt-3">
+                    <input class="form-check-input" type="checkbox" id="theme"></input>
+                    <label class="form-check-label" for="theme">
+                        Dark Theme
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+				<label class="control-label" for="name">Name</label>
+				<div class="row">
+					<div class="col-md-6">
+						<input id="name" name="name" class="form-control" type="text"
+							onkeydown="if (event.keyCode == 13) register();" />
+					</div>
+					<div class="col-md-6 text-right">
+						<a id="register" href="#" class="btn btn-primary"><span
+							class="glyphicon glyphicon-plus"></span> Register</a>
+					</div>
+				</div>
+
+				<br /> <br /> <label class="control-label" for="peer">Peer</label>
+				<div class="row">
+					<div class="col-md-6">
+						<input id="peer" name="peer" class="form-control" type="text"
+							onkeydown="if (event.keyCode == 13) call();"></input>
+					</div>
+					<div class="col-md-6 text-right">
+						<a id="call" href="#" class="btn btn-success"><span
+							class="glyphicon glyphicon-play"></span> Call</a> <a id="terminate"
+							href="#" class="btn btn-danger"><span
+							class="glyphicon glyphicon-stop"></span> Stop</a>
+					</div>
+				</div>
+				<br /> <label class="control-label" for="console">Console</label><br/>
+				<br />
+				<div id="console" class="democonsole">
+					<ul></ul>
+				</div>
+			</div>
+        
+        <div class="row h-90 w-100">
+            <div class="col-12 col-sm-6 d-flex justify-content-center">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <video class="embed-responsive-item" muted="muted"></video>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 d-flex justify-content-center">
+                <div id="peerDiv" class="embed-responsive embed-responsive-16by9">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+	<script src="resources/js/ali/io/require.js"></script>
+	<script src="resources/js/ali/ali.js"></script>
+	<script src="https://unpkg.com/peerjs@1.0.0/dist/peerjs.min.js"></script>	
+</body>
+
+</html>

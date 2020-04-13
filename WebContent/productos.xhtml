@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/WEB-INF/templates/ideatemplate.xhtml">
+	<ui:define name="content">
+		<div class="container">
+			<div class="row">
+				<h:form id="graciasid" styleClass="form-horizontal">
+					<body>
+						<div class="col-xs-12 col-xs-updated">
+						<center>
+						<div class="navbar navbar-inverse">
+							<div class="navbar-brand">
+								<h:outputText value="Productos y Servicios" />
+							</div>
+						</div>
+						
+						<div>
+							<img id="pfoto1" src="img/buscar.jpg" width="10%" />
+							<h:commandButton id="pa1" value="Busqueda" 
+							action="#{ideaBean.consultar}" 	styleClass="button_granidea"></h:commandButton>
+						</div>
+						
+						<p></p>
+						<div>
+							<img id="pfoto2" src="img/vigilar.jpg" width="10%" />
+							<h:commandButton id="pa2" value="Vigilancia de Productos" 
+							action="#{ideaBean.vigilar}" 	styleClass="button_granidea"></h:commandButton>
+						</div>
+						<p></p>
+						<div>
+							<img id="pfoto3" src="img/redes.jpg" width="10%" />
+							<h:commandButton id="pa3" value="Redes de Conocimiento" 
+							action="#{ideaBean.iniciar}" 	styleClass="button_granidea"></h:commandButton>
+						</div>
+						</center>
+							<div>
+								<img id="pfotoBombillo" src="img/health.jpg" width="20%" />
+							</div>
+						</div>
+					</body>
+				</h:form>
+			</div>
+		</div>
+
+
+
+
+	</ui:define>
+
+</ui:composition>
+
+</html>

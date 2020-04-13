@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<head>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"></link>
+	<script src='https://cdn.scaledrone.com/scaledrone.min.js'></script>
+    
+    
+</head>
+<ui:composition template="/WEB-INF/templete/adverturetemplate.xhtml">
+	<ui:define name="content">
+		<h:body>
+			<h:form id="entrevistaid" styleClass="form-horizontal">
+			<p:growl id="messages" showDetail="true" />
+			<p:toolbar>
+			     	<f:facet name="left">
+			          
+			
+			          <p:commandButton type="button" value="Llamar" onclick="PF('dlg3').show();" icon="pi pi-video" />
+			
+			          <span class="ui-separator">
+			              <span class="ui-icon pi pi-ellipsis-v" />
+			          </span>
+			
+			          <p:commandButton type="button" title="Save" icon="pi pi-save" />
+			          <p:commandButton type="button" title="Delete" icon="pi pi-trash" />
+			          <p:commandButton type="button" title="Print" icon="pi pi-print" />
+			      </f:facet>
+			
+			     <f:facet name="right">
+			         <p:menuButton value="Options">
+			             <p:menuitem value="show cita" onclick="window.open('#{loging.scheduleJava8View.cita.scale}');return false;" />
+			             <p:menuitem value="Homepage" url="http://localhost:8080/adventure/faces/home.xhtml" icon="pi pi-home" />
+			         </p:menuButton>
+			     </f:facet>
+			
+			 </p:toolbar>
+		 
+			 <p:dialog header="Video" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" height="340" width="400">
+	    		<h:panelGrid columns="2" toggleable="true" class="ui-panel">
+	    				<link href="resources/css/scale/scale.css" rel="stylesheet"></link>
+	    				
+	    				<script src='https://cdn.scaledrone.com/scaledrone.min.js'></script>
+	    				<script src="https://adventure-a5f70.web.app/scale/script.js"></script>
+	            		
+						
+						<video class="publisher" id="localVideo" autoplay="autoplay muted"></video>
+  						<video class="subscriber" id="remoteVideo" autoplay="autoplay"></video>
+				    
+				    </h:panelGrid>
+			</p:dialog>
+
+    
+			<p:layout style="min-width:200px;min-height:150px;">
+			    <p:layoutUnit position="west" resizable="true" size="230" minSize="40" maxSize="230">
+			        <p:megaMenu orientation="vertical" style="margin-top:20px">
+					    <p:menuitem value="Mi Agenda" action="#{loging.save}" 
+					        	 
+					        	icon="pi pi-check" />
+					    <p:menuitem value="Seguimiento" url="#" />
+					</p:megaMenu>		
+						        
+			        
+			    </p:layoutUnit>
+			 
+			    <p:layoutUnit position="center">
+			    	<h:panelGrid id="datoscita" columns="2" columnClasses="grid,grid">
+			        <h:panelGrid columns="2" columnClasses="label, value">
+						<p:outputLabel for="title" value="Tipo Proceso:" />
+						<h:outputText id="title" value="#{loging.scheduleJava8View.event.title}" styleClass="outputLabel"/>
+						
+						<p:outputLabel for="identrevistadoCc" value="Nro Documento:" />
+						<h:outputText id="identrevistadoCc" value="#{loging.scheduleJava8View.cita.entrevistado}" styleClass="outputLabel"/>
+						        
+					</h:panelGrid>
+					<h:panelGrid columns="2" columnClasses="label, value">
+						<p:outputLabel for="nrtitle" value="Nro Proceso:" />
+						<h:outputText id="nrtitle" value="#{loging.scheduleJava8View.cita.arpNroProceso}" styleClass="outputLabel"/>
+						
+						<h:outputText id="identrevistadoNom" value="#{loging.scheduleJava8View.cita.entrevistadoUsu.nombres}" styleClass="outputLabel"/>
+						<h:outputText id="identrevistadoApe" value="#{loging.scheduleJava8View.cita.entrevistadoUsu.apellidos}" styleClass="outputLabel"/>
+						    		
+					</h:panelGrid>
+					</h:panelGrid>
+			    </p:layoutUnit>
+			    
+			    
+			    <p:layoutUnit position="east">
+			    	<h:form id ="formClock">
+			        <p:clock displayMode="analog" />
+			        </h:form>
+			    </p:layoutUnit>
+					    
+			</p:layout>
+			
+			
+			<p:fieldset legend="Audiencia" style="margin-bottom:20px" rendered="#{loging.usu.entrevistador}">
+                <h:panelGrid id="confirmation" columns="2" columnClasses="grid,grid">
+                    <h:panelGrid columns="2" columnClasses="label, value">
+                        <h:outputText value="Nombres: " />
+                        <h:outputText value="#{loging.scheduleJava8View.cita.entrevistadoUsu.nombres}" styleClass="outputLabel"/>
+ 
+                        <h:outputText value="Apellidos: " />
+                        <h:outputText value="#{loging.scheduleJava8View.cita.entrevistadoUsu.apellidos}" styleClass="outputLabel"/>
+ 
+                        <h:outputText value="Nro Documento: " />
+                        <h:outputText value="#{loging.scheduleJava8View.cita.entrevistadoUsu.per_nro_doc}" styleClass="outputLabel"/>
+                    </h:panelGrid>
+ 
+                    <h:panelGrid columns="2" columnClasses="label, value">
+                        <h:outputText value="Dirección: " />
+                        <h:outputText value="#{loging.scheduleJava8View.cita.entrevistadoUsu.dir}" styleClass="outputLabel"/>
+                        
+                        <h:outputText value="Ciudad: " />
+                        <h:outputText value="#{loging.scheduleJava8View.cita.entrevistadoUsu.ciudad}" styleClass="outputLabel"/>
+                    
+                        <h:outputText value="Email: " />
+                        <h:outputText value="#{loging.scheduleJava8View.cita.entrevistadoUsu.email}" styleClass="outputLabel"/>
+ 
+                        <h:outputText value="Phone " />
+                        <h:outputText value="#{loging.scheduleJava8View.cita.entrevistadoUsu.celular}" styleClass="outputLabel"/>
+                        
+                    </h:panelGrid>
+                </h:panelGrid>
+                
+				  
+            
+	        <p:dataTable id="idsegui" var="segui" value="#{loging.scheduleJava8View.cita.proceso.seges}" >
+				    <p:column headerText="Cod" style="width:50px;">
+				        <h:outputText value="#{segui.parEstadoActu}"/>
+				    </p:column>
+				 
+				    <p:column headerText="Estado" >
+				        <h:outputText value="#{segui.nombreEstado}" />
+				    </p:column>
+				 
+				    <p:column headerText="Fecha Inicial" >
+				        <h:outputText value="#{segui.fecIni}" />
+				    </p:column>
+				 
+				    <p:column headerText="Fecha Final" >
+				        <h:outputText value="#{segui.fecFin}" />
+				    </p:column>
+				    
+			</p:dataTable>
+				
+			<h:panelGrid columns="2" >
+				<p:commandButton id="idguarda" 
+				action="#{loging.scheduleJava8View.cita.proceso.guardarAudiencia}" 
+				update="idsegui" value="Guardar Audiencia" width="25%"
+				disabled = "#{loging.scheduleJava8View.cita.proceso.enFirme}">
+				</p:commandButton>
+				
+				<p:commandButton id="idenfirme"
+				action="#{loging.scheduleJava8View.cita.proceso.dejarEnFirme}" 
+				update="idsegui" value="Dejar en Firme" width="25%"
+				disabled = "#{loging.scheduleJava8View.cita.proceso.enFirme}">
+					<p:ajax listener="#{loging.scheduleJava8View.cita.proceso.actualizaEnFirme}" update="idguarda idenfirme idautoriza" />
+				</p:commandButton>
+				
+				<p:commandButton id="idautoriza"
+				action="#{loging.scheduleJava8View.cita.proceso.autorizarSalida}" 
+				update="idsegui" value="Autorizar Salida" width="25%"
+				disabled = "#{loging.scheduleJava8View.cita.proceso.salidaAutorizada}">
+					<p:ajax listener="#{loging.scheduleJava8View.cita.proceso.actualizaEnFirme}" update="idguarda idenfirme idautoriza" />
+				</p:commandButton>
+				
+			</h:panelGrid>	
+				
+			</p:fieldset>
+			
+			
+	        <p:fieldset header="Adjuntos Entrevistado" >
+	        Cargar Archivo<br />
+			<h:form enctype="multipart/form-data">        
+			    <p:fileUpload value="#{fileUploadView.file}" mode="simple" skinSimple="true"/>
+			    <br />
+			    <!--  p:commandButton value="Submit" ajax="false" action="#{fileUploadView.upload}"  /-->
+			</h:form>
+			
+			<p:dialog modal="true" widgetVar="statusDialog" header="Status" draggable="false" closable="false" resizable="false">
+			<p:graphicImage name="/demo/images/ajaxloadingbar.gif" />
+			</p:dialog>
+			<h:form>   
+			    <p:commandButton value="Download" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" icon="pi pi-arrow-down">
+			        <p:fileDownload value="#{fileDownloadView.file}" />
+			    </p:commandButton>      
+			</h:form>
+	        
+	        </p:fieldset>
+	        
+			
+			</h:form>
+		</h:body>
+
+	</ui:define>
+
+</ui:composition>
+
+<script src='https://cdn.scaledrone.com/scaledrone.min.js'></script>
+
+</html>

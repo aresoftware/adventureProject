@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Adventure Project</title>
+    <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"></link>
+	<link href="resources/css/ali/main.css" rel="stylesheet"></link>
+    
+    
+</h:head>
+
+
+<h:body>
+<h:form>
+	<p:growl id="messages" showDetail="true" />
+	<p:toolbar>
+		<f:facet name="left">
+			<p:commandButton id="homeButton" type="button" icon="pi pi-list" style="width:30px"/>
+		    <p:menu overlay="true" trigger="homeButton" my="left top" at="left bottom">
+		        <p:submenu label="Home">
+		            <p:menuitem value="Save" action="#{loging.save}" update="messages" icon="pi pi-save"/>
+		            <p:menuitem value="Update" action="#{loging.update}" update="messages" icon="pi pi-refresh"/>
+		        </p:submenu>
+		        <p:submenu label="Navigations">
+		            <p:menuitem value="External" url="http://www.primefaces.org" icon="pi pi-home"/>
+		            <p:menuitem value="Internal" icon="pi pi-star"/>
+		        </p:submenu>
+		  	</p:menu>
+		  	<p:commandButton action="#{loging.casa}" icon="pi pi-home" />
+		  	
+		  	
+		</f:facet>
+		<f:facet name="right">
+			<p:commandButton id="userButton" value="Usuario" type="button" icon="pi pi-user-minus" style="width:30px" >
+			<p:menu overlay="true" trigger="userButton" my="left top" at="left bottom">
+                <p:menuitem value="Save" action="#{loging.save}" update="messages" icon="pi pi-save" />
+                <p:menuitem value="Update" action="#{loging.update}" update="messages" icon="pi pi-refresh" />
+                <p:menuitem value="Delete" action="#{loging.delete}" ajax="false" icon="pi pi-times" />
+                <p:submenu label="Navigations">
+		            <p:menuitem value="Cerrar sesión" icon="pi pi-star"/>
+		        </p:submenu>
+                
+            </p:menu>
+            </p:commandButton>
+		</f:facet>
+	</p:toolbar>
+ 
+    
+
+
+
+</h:form>
+</h:body>
+
+</html>

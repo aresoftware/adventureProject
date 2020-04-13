@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/WEB-INF/templates/ideatemplate.xhtml">
+	<ui:define name="content">
+		<div class="container">
+		<div class="row">
+		
+			<h:form id="graciasid" styleClass="form-horizontal">
+					<body>
+						<div class="col-xs-12 col-xs-updated">
+							<center>
+								<div>
+									<h2>
+										<h:outputText value="HealthApp - IdeaHealth" />
+									</h2>
+								</div>
+								<div>
+									<img id="health" src="img/healthcare.gif" width="25%" />
+								</div>
+								
+								<div class="form-group">
+									<h:outputLabel value="Usuario" styleClass="control-label col-sm-2" for="hu1" />
+									<div class="col-sm-10">
+										<h:inputText id="hu1" value="#{ideaBean.usuario}" styleClass="form-control" />
+									</div>
+								</div>
+								<div class="form-group">
+									<h:outputLabel value="Clave" styleClass="control-label col-sm-2" for="hu2" />
+									<div class="col-sm-10">
+										<h:inputSecret id="hu2" value="#{ideaBean.clave}" styleClass="form-control" />
+									</div>
+								</div>
+								<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-10">
+									<h:commandLink id="hi1" value="Regístrate____"
+										action="#{ideaBean.registrar}"  />
+									<h:commandLink id="hi2" value="____Contáctanos"
+										action="#{ideaBean.contactar}" />
+								</div>
+								<div class="col-sm-offset-2 col-sm-10">
+									<h:commandButton id="hi3" value="Ingresar"
+										action="#{ideaBean.ingresar}" class="button_orange" />
+								</div>
+								<div class="col-sm-10">
+									<h:outputText id="hu4error" value="#{ideaBean.error}" styleClass="form-control" />
+								</div>
+								
+								
+					</div>
+							</center>
+						</div>
+					</body>
+				</h:form>
+		
+			</div>
+		</div>
+
+
+
+
+	</ui:define>
+
+</ui:composition>
+
+
+</html>

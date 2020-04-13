@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/WEB-INF/templates/ideatemplate.xhtml">
+	<ui:define name="content">
+		<div class="container">
+			<div class="row">
+				<h:form id="vigilaid" styleClass="form-horizontal">
+					<body>
+						<div>
+						<center>
+						<div class="navbar navbar-inverse">
+							<div class="navbar-brand">
+								<h:outputText value="Vigilancia de Productos y Servicios" />
+								<h:commandLink value="Productos" action="#{ideaBean.regresarProd}"></h:commandLink>
+							</div>
+						</div>
+						
+						
+						<table class="table">
+						<tr>
+							<td>
+								<center>
+								<h5>VIGILANCIA EN COLOMBIA</h5>
+							
+								<a href="http://sipi.sic.gov.co/sipi/Extra/Default.aspx?sid=636397881549464636" target="_blank">Base de datos (SIPI)</a>
+							
+								</center>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<center>
+								<h5>VIGILANCIA EN EL MUNDO?</h5>
+								
+									
+									<a href="http://www.wipo.int/reference/es/branddb/" target="_blank">Base Mundial de Datos sobre Marcas</a>
+									<p></p>
+									<a href="http://www.wipo.int/madrid/monitor/es/index.jsp" target="_blank">Madrid Monitor</a>
+									<p></p>
+									<a href="https://www.tmdn.org/tmview/welcome.html?lang=es" target="_blank">TMview</a>
+								</center>
+							</td>
+						</tr>
+						<tr>
+						
+							<td>
+							
+								<h:inputText id="ba1" value="#{ideaBean.search.palabra}"></h:inputText>
+								<h:commandButton id="pa1" value="Busqueda" 
+								action="#{ideaBean.buscarVigila}" 	
+								style="background-image: url('..\\img\\buscar.jpg'); width:65px; height: 65px; color: white; border-color: white; font-size:15px; ">
+								</h:commandButton>
+							</td>
+						</tr>
+						
+						<tr>
+							<td>
+								<p:dataTable id="tidea" value="#{ideaBean.ideaList}" var="idea">
+										<p:column headerText="CIP:">
+											<h:outputText value="#{idea.cip}"></h:outputText>
+										</p:column>
+										<p:column headerText="TITULO">
+											<h:outputLabel value="#{idea.titulo}"></h:outputLabel>
+										</p:column>
+										<p:column headerText="INVENTOR">
+											<h:outputText value="#{idea.inventor}"></h:outputText>
+										</p:column>
+										
+										<p:column headerText="Incidente" >
+             								<h:commandButton value="View" action="#{ideaBean.incidentarPrime}" image="img/check.png">
+								                <f:setPropertyActionListener value="#{idea}" target="#{ideaBean.selectedIdea}" />
+								            </h:commandButton>
+								        </p:column>
+								        
+										<p:column style="width:32px;text-align: center">
+             <p:commandButton update=":vigilaid:carDetail" oncomplete="PF('carDialog').show()" image="img/check.png" title="View">
+                <f:setPropertyActionListener value="#{idea}" target="#{ideaBean.selectedIdea}" />
+            </p:commandButton>
+        </p:column>
+													
+									</p:dataTable>
+									
+									
+									
+									
+									<p:dialog header="Información del Incidente" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+								        <p:outputPanel id="carDetail" style="text-align:center;">
+								            <p:panelGrid  columns="2" rendered="#{not empty ideaBean.selectedIdea}" columnClasses="label,value">
+								                <f:facet name="header">
+								                    <p:graphicImage name="demo/images/car/#{ideaBean.selectedIdea.titulo}-big.gif"/> 
+								                </f:facet>
+								                 
+								                <h:outputText value="CIP:" />
+								                <h:outputText value="#{ideaBean.selectedIdea.cip}" />
+								 
+								                <h:outputText value="Titulo" />
+								                <h:outputText value="#{ideaBean.selectedIdea.titulo}" />
+								 
+								                <h:outputText value="Inventor:" />
+								                <h:outputText value="#{ideaBean.selectedIdea.inventor}" />
+								             
+								                
+								            </p:panelGrid>
+								        </p:outputPanel>
+								    </p:dialog>
+									
+							</td>
+						</tr>
+							
+						
+						</table>
+						</center>
+							<div>
+								<img id="pfotoBombillo" src="img/health.jpg" width="20%" />
+							</div>
+						
+						</div>
+					</body>
+				</h:form>
+			</div>
+		</div>
+
+
+
+
+	</ui:define>
+
+</ui:composition>
+
+</html>

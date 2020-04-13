@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/WEB-INF/templete/adverturetemplate.xhtml">
+	<ui:define name="content">
+		<h:body>
+			<h:form id="graciasid" styleClass="form-horizontal">
+			<p:growl id="messages" showDetail="true" />
+		<p:toolbar>
+		     	<f:facet name="left">
+		          <p:commandButton type="button" value="New" icon="pi pi-file" />
+		
+		          <p:commandButton type="button" value="Open" icon="pi pi-folder-open" />
+		
+		          <span class="ui-separator">
+		              <span class="ui-icon pi pi-ellipsis-v" />
+		          </span>
+		
+		          <p:commandButton type="button" title="Save" icon="pi pi-save" />
+		          <p:commandButton type="button" title="Delete" icon="pi pi-trash" />
+		          <p:commandButton type="button" title="Print" icon="pi pi-print" />
+		      </f:facet>
+		
+		     <f:facet name="right">
+		         <p:menuButton value="Options">
+		             <p:menuitem value="Save" action="#{loging.save}" update="messages" icon="pi pi-save" />
+		             <p:menuitem value="Update" action="#{loging.update}" update="messages" icon="pi pi-refresh" />
+		             <p:menuitem value="Delete" action="#{loging.delete}" ajax="false" icon="pi pi-times" />
+		             <p:menuitem value="Homepage" url="http://localhost:8080/adventure/faces/inicio.xhtml" icon="pi pi-home" />
+		         </p:menuButton>
+		     </f:facet>
+		
+		 </p:toolbar>
+
+    
+	<p:layout style="min-width:200px;min-height:100px;">
+	    <p:layoutUnit position="west" resizable="true" size="100" minSize="40" maxSize="200">
+	        
+	        <p:commandButton id="dynaButton" value="Home" type="button" icon="pi pi-home" style="width:30px"/>
+		    <p:menu overlay="true" trigger="dynaButton" my="left top" at="left bottom">
+		        <p:submenu label="Ajax">
+		            <p:menuitem value="Save" action="#{loging.save}" update="messages" icon="pi pi-save"/>
+		            <p:menuitem value="Update" action="#{loging.update}" update="messages" icon="pi pi-refresh"/>
+		        </p:submenu>
+		        <p:submenu label="Non-Ajax">
+		            <p:menuitem value="Delete" action="#{loging.delete}" update="messages" ajax="false" icon="pi pi-times"/>
+		        </p:submenu>
+		        <p:submenu label="Navigations">
+		            <p:menuitem value="External" url="http://www.primefaces.org" icon="pi pi-home"/>
+		            <p:menuitem value="Internal" icon="pi pi-star"/>
+		        </p:submenu>
+		  	</p:menu>
+	    </p:layoutUnit>
+	 
+	    <p:layoutUnit position="center">
+	        Center
+	    </p:layoutUnit>
+	    
+	    <p:layoutUnit position="east">
+	        Usuario
+	    </p:layoutUnit>
+			    
+	</p:layout>
+			
+
+				
+			
+				
+					<h:panelGrid columns="3" cellpadding="5">
+				        <p:photoCam widgetVar="pc" listener="#{loging.oncapture}" update="photo" />
+				        <h:panelGrid columns="1" cellpadding="5">
+				        	<p:commandButton type="button" value="Capture" onclick="PF('pc').capture()"/>
+							<p:commandButton value="Effects" type="button" onclick="PF('dlg3').show();" /> 
+				        	<p:dialog header="Infractor" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" height="100">
+    							<iframe src="https://www.appr.tc" width="360" height="640"></iframe>
+							</p:dialog>
+						</h:panelGrid>
+				        <p:outputPanel id="photo">
+				            <p:graphicImage name="demo/images/photocam/#{loging.filename}.jpeg" rendered="#{not empty loging.filename}"/>
+				        </p:outputPanel>
+				    </h:panelGrid>
+				
+					
+					<p:panel styleClass="session" header="Iniciar">
+
+					<h:outputLabel value="usuario" />
+					<p:inputText id="user" required="true" requiredMessage="debe"></p:inputText>
+					<p:message for="user" />
+					</p:panel>
+							
+			
+			
+			<center>
+			<iframe src="http://localhost:8080/adventureProject/faces/scaledrone.html" width="250" height="250"> 
+			</iframe>
+		</center>
+			
+			</h:form>
+		</h:body>
+		
+
+
+
+	</ui:define>
+
+</ui:composition>
+
+
+</html>
