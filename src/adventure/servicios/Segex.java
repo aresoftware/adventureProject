@@ -1,11 +1,23 @@
 package adventure.servicios;
 
+import org.primefaces.model.file.UploadedFile;
+
 public class Segex {
 	
 	private int parEstadoActu;
     private String nombreEstado;
     private String fecIni;
     private String fecFin;
+    private UploadedFile file;
+    
+    
+    
+	public UploadedFile getFile() {
+		return file;
+	}
+	public void setFile(UploadedFile file) {
+		this.file = file;
+	}
 	public int getParEstadoActu() {
 		return parEstadoActu;
 	}

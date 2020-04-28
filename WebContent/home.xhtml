@@ -50,15 +50,16 @@
 				    
 				    <h:outputText id="identrevistado" value="#{loging.scheduleJava8View.cita.entrevistadoUsu.nombres}" />
 				    
+				    <!-- 
 				    <p:button value="show cita" onclick="window.open('#{loging.scheduleJava8View.cita.url}');return false;" />
-				    
-				    <p:commandButton action="#{loging.abrirCita}" update="messages" value="Abrir Cita" width="25%"/>
+				     -->
+				    <h:commandButton action="#{loging.abrirCita}" update="messages" value="Abrir Cita" width="25%"/>
 				    		        	
 		        </h:panelGrid>
 	        </h:panelGrid>
 	    </p:layoutUnit>
 	    
-	    <p:layoutUnit position="east">
+	    <p:layoutUnit position="east" resizable="true" size="140" minSize="40" maxSize="230">
 	    	<h:form id ="formClock">
 	        <p:clock displayMode="analog" />
 	        </h:form>

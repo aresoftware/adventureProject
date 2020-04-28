@@ -172,7 +172,8 @@ public class Cita {
 
 	public String getUrl() {
 		//url = "http://localhost:8080/adventureProject/faces/entrevista.xhtml?room="+getRoom();
-		url = "http://localhost:8080/adventureProject/faces/entrevista.xhtml#"+getRoom();
+		url = "http://localhost:8080/adventureProject/faces/entrevista.xhtml#a1"+getIdCita();
+		//url = "https://adventureproject.net/entrevista.xhtml#a1"+getRoom();
 		return url;
 	}
 

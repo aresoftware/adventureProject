@@ -11,16 +11,18 @@ public class DBConneccionSchool {
 	private final String dbPort = "3306"; 
 	private String mensajeError = ""; 
 
-	public Connection getConexion(){ 
+	public Connection getConexion(){
+		return getConexionInformix();
+	}
+	
+	public Connection getConexionMYSQL(){ 
 		Connection connection = null;
 		try{
 			
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			//desa
 			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/jdcl?user=root&password=admin");
-			//prod
-			//connection = DriverManager.getConnection("jdbc:mysql://aa14vfl1xuy8utn.comiwe9j931a.us-east-2.rds.amazonaws.com:3306/ebdb?user=uniandes&password=Un1andes");
-			//connection = DriverManager.getConnection("jdbc:mysql://jdcl.cznjtfnisb9r.us-east-2.rds.amazonaws.com:3306/jdcl?user=admin&password=Adventur3");
+						
 		/*Statement sql = connection.createStatement();
 		ResultSet result = sql.executeQuery("SELECT * FROM usuarios");
 		if(result.next() )
@@ -28,6 +30,20 @@ public class DBConneccionSchool {
 			return connection;
 			//out.println(result.getString("field") + "<br />");
 		}*/
+		}catch(Exception x){
+			mensajeError = x.getMessage();
+			x.printStackTrace();
+		}
+		
+		return connection;
+	}
+	public java.sql.Connection getConexionInformixDos(){ 
+		Connection connection = null;
+		try{
+			
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			//desa
+			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/jdcl?user=root&password=admin");
 		}catch(Exception x){
 			mensajeError = x.getMessage();
 			x.printStackTrace();
@@ -126,6 +142,33 @@ public class DBConneccionSchool {
 		
 		return connection;
 	}
+	
+	//public java.sql.Connection getConexionInformix(){
+	public java.sql.Connection getConexionInformix(){
+	    java.sql.Connection cnx = null;
+	    String lsConn = "";
+	    java.lang.Class  c = null;
+	    java.lang.Object o = null;
+	    java.sql.Driver  d = null;
+	    try {
+	      c = java.lang.Class.forName("com.informix.jdbc.IfxDriver");
+	      o = c.newInstance();
+	      d = (java.sql.Driver) o;
+	      java.sql.DriverManager.registerDriver( d );
+	      //lsConn = biblio_it.ConfigMgr.getFullConnectURL(this.obtenerLogin(),
+	        //       this.obtenerClave());
+	      //lsConn = this.cadenaConn;
+	      lsConn = "jdbc:informix-sqli://192.168.36.11:9221/bas_bogota:INFORMIXSERVER=serlab11_tcp;user=aliperez;password=BAO2xos7";
+	      o = java.sql.DriverManager.getConnection( lsConn  );
+	      cnx = (java.sql.Connection) o;
+	      //System.out.println(lsConn);
+	    }
+	    catch (Exception ex) {
+	    	ex.printStackTrace();
+	    	//System.out.println(ex.printStackTrace());
+	    }
+	    return cnx;
+	  }
 	
 	
 	/**

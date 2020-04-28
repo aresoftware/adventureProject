@@ -77,6 +77,7 @@ public class UserSession {
 
   public void sendMessage(JsonObject message) throws IOException {
     log.debug("Sending message from user '{}': {}", name, message);
+    
     session.getBasicRemote().sendText(message.toString());
     //session.sendMessage(new TextMessage(message.toString()));
   }

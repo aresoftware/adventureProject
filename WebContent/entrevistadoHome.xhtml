@@ -50,9 +50,11 @@
 				    
 				    <h:outputText id="identrevistado" value="#{loging.scheduleJava8View.cita.funcionario}" />
 				    
-				    <p:button value="show cita" onclick="window.open('#{loging.scheduleJava8View.cita.url}');return false;" />
+				    
 				    <p:commandButton action="#{loging.abrirCita}" update="messages" value="Abrir Cita" width="25%"/>
-				    		        	
+				    <!-- 
+				    <p:button value="show cita" onclick="window.open('#{loging.scheduleJava8View.cita.url}');return false;" />
+				     -->		        	
 		        </h:panelGrid>
 	        </h:panelGrid>
 	    </p:layoutUnit>

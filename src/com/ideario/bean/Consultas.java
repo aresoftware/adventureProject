@@ -13,6 +13,7 @@ import com.ideario.vo.Usuario;
 import adventure.servicios.Cita;
 import adventure.servicios.Proceso;
 import adventure.servicios.Segex;
+import adventure.servicios.vo.EstadoParam;
 
 
 public class Consultas {
@@ -235,7 +236,7 @@ public class Consultas {
 		u.setClave(clave);
 		//u.setExiste(true);
 		
-		
+		System.out.println("consultando "+usu);
 		
 		u.setExiste(false);
 		DBConneccionSchool db = new DBConneccionSchool();
@@ -260,7 +261,7 @@ public class Consultas {
 			 	*/
 			
 			
-			lps = conn.prepareStatement("select * from usuarios " +
+			lps = conn.prepareStatement("select * from adv_usuario " +
     				    				" where usuario = ? "+
 										" and clave = ? ");
 			lps.setString(1, usu);
@@ -284,9 +285,9 @@ public class Consultas {
 			
 			
 			
-			
+    		System.out.println("pudo consultar "+usu);
 		} catch (Exception e) {
-			
+			System.out.println("no pudo consultar "+usu);
 			// TODO: handle exception
 			e.printStackTrace();
 		}finally{
@@ -309,7 +310,7 @@ public class Consultas {
 		try {
 			conn = db.getConexion();
 			
-			lps = conn.prepareStatement("select * from usuarios " +
+			lps = conn.prepareStatement("select * from adv_usuario " +
     				    				" where per_nro_doc = ? ");
 			lps.setString(1, perNroDoc);
     		rs = lps.executeQuery(); 
@@ -377,7 +378,7 @@ public class Consultas {
 			
 			conn = db.getConexion();
     		
-    		lps = conn.prepareStatement("INSERT INTO usuarios (" +
+    		lps = conn.prepareStatement("INSERT INTO adv_usuario (" +
 					"usuario, " +
 					"clave, " +
 					"nombres, " +
@@ -420,8 +421,8 @@ public class Consultas {
 		PreparedStatement lps = null;
 		ResultSet rs = null;
 		try {
-			conn = db.getConexion();
-			
+			//conn = db.getConexion();
+			conn = db.getConexionInformix();
 			lps = conn.prepareStatement("select * from cita_0001 " +
 										" where cit_funcionario = "+perNroDoc.trim()+
 										//" and cit_dia > (today-)"
@@ -465,8 +466,8 @@ public class Consultas {
 		PreparedStatement lps = null;
 		ResultSet rs = null;
 		try {
-			conn = db.getConexion();
-			
+			//conn = db.getConexion();
+			conn = db.getConexionInformix();
 			lps = conn.prepareStatement("select * from cita_0001 " +
 										" where cit_entrevistado = "+perNroDoc.trim()+
 										//" and cit_dia > (today-)"
@@ -541,6 +542,22 @@ public class Consultas {
 		p.setRprFechaRad(rprFechaRad);
 		
 		p.setSeges(getSeguimiento(parTipoProceso, arpNroProceso, rprFechaRad));
+		p.setComNumero(getComNumero(parTipoProceso, arpNroProceso, rprFechaRad));
+		
+		
+		
+		for (Segex s: p.getSeges()) {
+			p.setParEstadoAnt(p.getParEstadoActu());
+			//p.parEstadoAnt = p.parEstadoActu; 
+			p.setParEstadoActu(s.getParEstadoActu());
+			//p.parEstadoActu = s.getParEstadoActu();
+			if (s.getParEstadoActu() == 147) {
+				p.setEnFirme(true);
+			}else if (s.getParEstadoActu() == 3) {
+				p.setSalidaAutorizada(true);
+			}
+		}
+		//cambiarEstado();
 		
 		
 		return p;
@@ -554,7 +571,8 @@ public class Consultas {
 		PreparedStatement lps = null;
 		ResultSet rs = null;
 		try {
-			conn = db.getConexion();
+			//conn = db.getConexion();
+			conn = db.getConexionInformix();
 			
 						
 			String str = "select * "
@@ -588,63 +606,29 @@ public class Consultas {
 		
 		return l;
 	}
-
 	
-	public String crearTablas() {
-		String c ="creada tabla ";
+	public String getComNumero(int parTipoProceso, int arpNroProceso, String rprFechaRad){
+		String com = "";
 		DBConneccionSchool db = new DBConneccionSchool();
 		Connection conn = null;
 		PreparedStatement lps = null;
 		ResultSet rs = null;
 		try {
-			conn = db.getConexion();
+			//conn = db.getConexion();
+			conn = db.getConexionInformix();
 			
-			lps = conn.prepareStatement("CREATE TABLE IF NOT EXISTS usuarios (" + 
-					"  idusuario bigint(20) unsigned NOT NULL AUTO_INCREMENT, "+ 
-					"  usuario varchar(200) NOT NULL," + 
-					"  clave varchar(50) NOT NULL," + 
-					"  nombres varchar(200) NOT NULL," + 
-					"  apellidos varchar(200) NOT NULL," + 
-					"  par_tipo_doc int(11) NOT NULL," + 
-					"  per_nro_doc varchar(50) NOT NULL DEFAULT ''," + 
-					"  dir varchar(250) NOT NULL," + 
-					"  ciudad varchar(100) NOT NULL," + 
-					"  celular bigint(20) NOT NULL," + 
-					"  email varchar(200) NOT NULL," + 
-					"  idrol int(11) NOT NULL," + 
-					"  UNIQUE KEY (idusuario)" + 
-					")");
-			lps.executeUpdate();
-			 	
-			
-			/*
-			lps = conn.prepareStatement("CREATE TABLE IF NOT EXISTS ideas " +
-					"(ididea int(11) not null, " +
-					"cip varchar(100), " +
-					"inventor varchar(100), " +
-					"titulo varchar(100), " +
-					"PRIMARY KEY (ididea)) ");
-			lps.executeUpdate();
-			
-			ResultadoBusqueda a = new ResultadoBusqueda();
-			a.setIdidea(1);
-			a.setTitulo("tabla idea Se creó");
-			l.add(a);
-			
-			lps = conn.prepareStatement("REPLACE INTO ideas (ididea, cip, inventor, titulo) VALUES "+
-						"(1, 'B43L19/00', 'JAVIER TORRES PAEZ', 'BORRADOR PORTÁTIL ABSORBENTE CON TAPA PARA SUPERFICIES ACRÍLICAS'),"+
-						"(2, 'B43K29/00', 'NAVILLE E. ANDREWS', 'MONTAJE DE ESCRITURA CON MONTAJE BORRADOR'),"+
-						"(3, 'B43L19/00', 'LOPEZ SAGUEZ MANUEL','BORRADOR ELÉCTRICO PARA PIZARRAS')");
-			lps.executeUpdate();
-			*/
-			
-			lps = conn.prepareStatement("REPLACE INTO usuarios (idusuario, usuario, clave, nombres, apellidos, par_tipo_doc, per_nro_doc, dir, ciudad, celular, email, idrol) VALUES" + 
-					"	(1, 'isaytrainer', 'cortes', 'Jesus', 'Ladino', 1, '79572200', 'Cra', 'Bogotá', 3017851381, 'jdcl12@hotmail.com', 2)," + 
-					"	(2, 'jesus', 'ladino', 'David', 'Cortes', 1, '79572210', 'Cra 69 d', 'Bogota', 3017851381, 'david@david.com', 1)," + 
-					"	(3, 'antonio', 'jaramillo', 'Antonio Jose', 'Jaramillo', 1, '1000', 'cra calle', 'Bogota', 3011001010, 'asdas@valido.com', 1)");
-			lps.executeUpdate();
-			
-			c= "ok";
+						
+			String str = "select * "
+					+ "from radpr_8112 s where " 
+					+ "s.par_tipo_proceso = "+parTipoProceso+" and "
+					+ "s.arp_nro_proceso = "+arpNroProceso+ " and "
+					+ "s.rpr_fecha_rad ='"+rprFechaRad+"'";
+					lps = conn.prepareStatement(str);
+					rs = lps.executeQuery(); 
+
+    		while(rs.next()){
+    			com = rs.getString("com_numero_total");
+    		}
 			
 		} catch (Exception e) {
 			
@@ -653,9 +637,62 @@ public class Consultas {
 		}finally{
 			db.cerrarConeccion(conn, lps, rs);
 		}
-		
-		
-		
-		return c;
+		return com;
 	}
+
+	public List<EstadoParam> cambiarEstado(Proceso p) {
+		int parTipoProceso = p.getParTipoProceso(); 
+		int parEstadoAnt = p.getParEstadoAnt();
+		int parEstadoActu = p.getParEstadoActu();
+		String lstrQuery = "";
+		String[] lstrDatos = new String[8];
+		boolean lbooAbrir = true;
+		String pasoSiguiente1 = "";
+		
+		List<EstadoParam> estados = new ArrayList<EstadoParam>();
+
+		if (parEstadoActu == 404)
+			parEstadoAnt = 0;
+
+		lstrQuery = "select distinct grasp_8110.par_estado_sig, A.par_descripcion,grasp_8110.forma"
+				+ " from grasp_8110,param_0031 A" + 
+				" where grasp_8110.par_tipo_proceso = " + parTipoProceso + 
+				" and grasp_8110.par_estado_ant =" + parEstadoAnt
+				+ " and grasp_8110.par_estado_actu = " + parEstadoActu
+				+ " and grasp_8110.par_estado_sig = A.par_codigo";
+		
+		if (parTipoProceso == 100) {
+			lstrQuery = lstrQuery + " and A.cla_clase = 224";
+		} else {
+			lstrQuery = lstrQuery + " and A.cla_clase = 72";
+		}
+		
+		DBConneccionSchool db = new DBConneccionSchool();
+		Connection conn = null;
+		PreparedStatement lps = null;
+		ResultSet rs = null;
+		try {
+			conn = db.getConexionInformix();
+			lps = conn.prepareStatement(lstrQuery);
+			rs = lps.executeQuery(); 
+			estados = new ArrayList<EstadoParam>();
+			while (rs.next()) {
+				
+				EstadoParam state = new EstadoParam();
+				state.setCodigo(rs.getInt("par_estado_sig"));
+				state.setDesc(rs.getString("par_descripcion"));
+				state.setForma(rs.getString("forma"));
+				estados.add(state);
+				//addMessage("Faild", "No existen mas pasos para el proceso");
+				
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally{
+			db.cerrarConeccion(conn, lps, rs);
+		}
+		
+		return estados;
+		}
+	
 }

@@ -3,9 +3,9 @@ package kurento;
 import javax.websocket.server.ServerEndpoint;
 
 import org.kurento.client.KurentoClient;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
+//import org.springframework.boot.SpringApplication;
+//import org.springframework.boot.autoconfigure.SpringBootApplication;
+//import org.springframework.context.annotation.Bean;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
@@ -18,21 +18,21 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
  * @since 4.3.1
  */
 
-@SpringBootApplication
+//@SpringBootApplication
 @EnableWebSocket
 public class One2OneCallApp implements WebSocketConfigurer {
 
-  @Bean
+  //@Bean
   public CallHandler callHandler() {
     return new CallHandler();
   }
 
-  @Bean
+  //@Bean
   public UserRegistry registry() {
     return new UserRegistry();
   }
 
-  @Bean
+  //@Bean
   public KurentoClient kurentoClient() {
     return KurentoClient.create();
   }
@@ -43,6 +43,6 @@ public class One2OneCallApp implements WebSocketConfigurer {
   }
 
   public static void main(String[] args) throws Exception {
-    SpringApplication.run(One2OneCallApp.class, args);
+    //SpringApplication.run(One2OneCallApp.class, args);
   }
 }

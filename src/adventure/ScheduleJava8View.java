@@ -12,7 +12,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.inject.Named;
+
 
 import org.primefaces.event.ScheduleEntryMoveEvent;
 import org.primefaces.event.ScheduleEntryResizeEvent;
@@ -347,8 +347,10 @@ public class ScheduleJava8View implements Serializable {
 	    	for (Cita ci : citas) {
 	    		System.out.println(ci.getEntrevistado());
 	    		
+	    		ci.getProceso().setInformix(usu.isInformix());
+	    		
 	    		event = DefaultScheduleEvent.builder()
-		                .title("Inmovilizado")
+		                .title(""+ci.getProceso().getNombreProceso()+ " - " +ci.getEntrevistadoUsu().getNombres()+ " "+ci.getEntrevistadoUsu().getApellidos())
 		                .startDate(convertirHora(ci.getHoraIni(), ci.getDiaCita()))
 		                .endDate(convertirHora(ci.getHoraFin(), ci.getDiaCita()))
 		                .description("Cita")
@@ -366,6 +368,7 @@ public class ScheduleJava8View implements Serializable {
 	    	citas = c.getCitasEntrevistado(usu.getPer_nro_doc());
 	    	for (Cita ci : citas) {
 	    		System.out.println(ci.getEntrevistado());
+	    		ci.getProceso().setInformix(usu.isInformix());
 	    		
 	    		event = DefaultScheduleEvent.builder()
 		                .title("Inmovilizado")

@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/WEB-INF/templete/adverturetemplate.xhtml">
+	<ui:define name="content">
+
+		<h:body>
+			<h:form id="estadoid" styleClass="form-horizontal">
+		
+				
+	    		 <p:dataTable id="idcsp" 
+	    		 	var="est" value="#{loging.estados}"
+	    		 	selectionMode="single"
+	    		 	selection="#{loging.estado}" rowKey="#{est.codigo}"
+	    		 	
+	    		 	>
+	    		 	<f:facet name="header">
+            			Seleccione Estado
+        			</f:facet>
+	    		 	
+        			<p:column headerText="Estado" style="width:100px;">
+				        <h:outputText value="#{est.codigo}"/>
+				    </p:column>
+				 
+				    <p:column headerText="Descripcion" style="width:300px;">
+				        <h:outputText value="#{est.desc}" />
+				    </p:column>
+				 
+				    <p:column headerText="Forma" style="width:100px;">
+				        <h:outputText value="#{est.forma}" />
+				    </p:column>
+				 	<f:facet name="footer">
+				 		<p:commandButton icon="pi pi-search" value="Aceptar" action="#{loging.abrirCita}" />
+        			</f:facet>
+				    
+				</p:dataTable>
+				
+				
+			</h:form>
+		</h:body>
+
+	</ui:define>
+
+</ui:composition>
+	
+</html>

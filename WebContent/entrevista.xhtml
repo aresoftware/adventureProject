@@ -41,19 +41,7 @@
 			
 			 </p:toolbar>
 		 
-			 <p:dialog header="Video" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" height="340" width="400">
-	    		<h:panelGrid columns="2" toggleable="true" class="ui-panel">
-	    				<link href="resources/css/scale/scale.css" rel="stylesheet"></link>
-	    				
-	    				<script src='https://cdn.scaledrone.com/scaledrone.min.js'></script>
-	    				<script src="https://adventure-a5f70.web.app/scale/script.js"></script>
-	            		
-						
-						<video class="publisher" id="localVideo" autoplay="autoplay muted"></video>
-  						<video class="subscriber" id="remoteVideo" autoplay="autoplay"></video>
-				    
-				    </h:panelGrid>
-			</p:dialog>
+			 
 
     
 			<p:layout style="min-width:200px;min-height:150px;">
@@ -72,7 +60,7 @@
 			    	<h:panelGrid id="datoscita" columns="2" columnClasses="grid,grid">
 			        <h:panelGrid columns="2" columnClasses="label, value">
 						<p:outputLabel for="title" value="Tipo Proceso:" />
-						<h:outputText id="title" value="#{loging.scheduleJava8View.event.title}" styleClass="outputLabel"/>
+						<h:outputText id="title" value="#{loging.scheduleJava8View.cita.proceso.nombreProceso}" styleClass="outputLabel"/>
 						
 						<p:outputLabel for="identrevistadoCc" value="Nro Documento:" />
 						<h:outputText id="identrevistadoCc" value="#{loging.scheduleJava8View.cita.entrevistado}" styleClass="outputLabel"/>
@@ -110,6 +98,9 @@
  
                         <h:outputText value="Nro Documento: " />
                         <h:outputText value="#{loging.scheduleJava8View.cita.entrevistadoUsu.per_nro_doc}" styleClass="outputLabel"/>
+                        
+                        <h:outputText value="Comparendo: " />
+                        <h:outputText value="#{loging.scheduleJava8View.cita.proceso.comNumero}" styleClass="outputLabel"/>
                     </h:panelGrid>
  
                     <h:panelGrid columns="2" columnClasses="label, value">
@@ -148,51 +139,46 @@
 				    </p:column>
 				    
 			</p:dataTable>
-				
-			<h:panelGrid columns="2" >
-				<p:commandButton id="idguarda" 
-				action="#{loging.scheduleJava8View.cita.proceso.guardarAudiencia}" 
-				update="idsegui" value="Guardar Audiencia" width="25%"
-				disabled = "#{loging.scheduleJava8View.cita.proceso.enFirme}">
-				</p:commandButton>
-				
-				<p:commandButton id="idenfirme"
-				action="#{loging.scheduleJava8View.cita.proceso.dejarEnFirme}" 
-				update="idsegui" value="Dejar en Firme" width="25%"
-				disabled = "#{loging.scheduleJava8View.cita.proceso.enFirme}">
-					<p:ajax listener="#{loging.scheduleJava8View.cita.proceso.actualizaEnFirme}" update="idguarda idenfirme idautoriza" />
-				</p:commandButton>
-				
-				<p:commandButton id="idautoriza"
-				action="#{loging.scheduleJava8View.cita.proceso.autorizarSalida}" 
-				update="idsegui" value="Autorizar Salida" width="25%"
-				disabled = "#{loging.scheduleJava8View.cita.proceso.salidaAutorizada}">
-					<p:ajax listener="#{loging.scheduleJava8View.cita.proceso.actualizaEnFirme}" update="idguarda idenfirme idautoriza" />
-				</p:commandButton>
-				
-			</h:panelGrid>	
-				
+			<center>	
+			<p:commandButton action="#{loging.mostrarPaso}" update="messages" value="Cambiar Estado" width="25%"/>
+			</center>
 			</p:fieldset>
+			<h:panelGrid id="idest" columns="2" columnClasses="grid,grid">
+				<h:outputText value="Estado Actual: " />
+                <h:outputText value="#{loging.estado.desc}" styleClass="outputLabel"/>
+                
+                <h:outputText value="Archivo a guardar: " />
+                <h:outputText id="fg" value="#{loging.estado.file.fileName}" styleClass="outputLabel"/>
+                
+                <h:outputText value="Adjuntar Archivo" />
+                
+				<h:form enctype="multipart/form-data">
+				    <h:inputFile value="#{loging.uploadedFile}">
+				        <f:ajax listener="#{loging.saveFile}" />
+				    </h:inputFile>
+				</h:form>        
+				
+				
+			<p:commandButton id="idguarda" 
+				action="#{loging.guardarPaso}" 
+				update="idsegui" value="Guardar paso" width="25%">
+				</p:commandButton>
 			
 			
-	        <p:fieldset header="Adjuntos Entrevistado" >
-	        Cargar Archivo<br />
-			<h:form enctype="multipart/form-data">        
-			    <p:fileUpload value="#{fileUploadView.file}" mode="simple" skinSimple="true"/>
-			    <br />
-			    <!--  p:commandButton value="Submit" ajax="false" action="#{fileUploadView.upload}"  /-->
-			</h:form>
-			
-			<p:dialog modal="true" widgetVar="statusDialog" header="Status" draggable="false" closable="false" resizable="false">
-			<p:graphicImage name="/demo/images/ajaxloadingbar.gif" />
-			</p:dialog>
-			<h:form>   
-			    <p:commandButton value="Download" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" icon="pi pi-arrow-down">
-			        <p:fileDownload value="#{fileDownloadView.file}" />
-			    </p:commandButton>      
-			</h:form>
 	        
-	        </p:fieldset>
+                	
+			
+			</h:panelGrid>
+			
+			
+			
+							
+			
+			
+			
+	        
+	        
+	        
 	        
 			
 			</h:form>

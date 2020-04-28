@@ -26,7 +26,15 @@ public class Usuario {
 	private boolean entrevistador=false;
 	private boolean entrevistado=false;
 	
+	private boolean informix=false;
 	
+	
+	public boolean isInformix() {
+		return informix;
+	}
+	public void setInformix(boolean informix) {
+		this.informix = informix;
+	}
 	public boolean isEntrevistador() {
 		return entrevistador;
 	}
